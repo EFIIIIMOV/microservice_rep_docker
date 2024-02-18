@@ -9,8 +9,6 @@ from aio_pika import IncomingMessage
 from uuid import UUID
 
 from app.settings import settings
-#from app_document.app.services.document_service import DocumentService
-#from app_document.app.repositories.db_document_repo import DocumentRepo
 
 
 async def send_to_document_queue(data: dict):
@@ -57,15 +55,15 @@ async def send_to_document_queue(data: dict):
 #         traceback.print_exc()
 #         await msg.ack()
 
-
-async def consume(loop: AbstractEventLoop) -> AbstractRobustConnection:
-    connection = await aio_pika.connect_robust(settings.amqp_url, loop=loop)
-    channel = await connection.channel()
-
-    document_created_queue = await channel.declare_queue('document_created_queue', durable=True)
-
-    #await document_created_queue.consume(process_created_document)
-
-    print('Started RabbitMQ consuming...')
-
-    return connection
+#
+# async def consume(loop: AbstractEventLoop) -> AbstractRobustConnection:
+#     connection = await aio_pika.connect_robust(settings.amqp_url, loop=loop)
+#     channel = await connection.channel()
+#
+#     document_created_queue = await channel.declare_queue('document_created_queue', durable=True)
+#
+#     #await document_created_queue.consume(process_created_document)
+#
+#     print('Started RabbitMQ consuming...')
+#
+#     return connection

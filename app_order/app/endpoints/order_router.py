@@ -13,19 +13,6 @@ def get_order(order_service: OrderService = Depends(OrderService)) -> list[Order
     return order_service.get_order()
 
 
-# @order_router.post('/')
-# def add_order(
-#         order_info: CreateOrderRequest,
-#         order_service: OrderService = Depends(OrderService)
-# ) -> Order:
-#     try:
-#         print('\n///post_order///\n')
-#         order = order_service.create_order(order_info.ord_id, order_info.address_info, order_info.customer_info,
-#                                            order_info.create_date, order_info.completion_date, order_info.order_info)
-#         return order.dict()
-#     except KeyError:
-#         raise HTTPException(400, f'Order with id={order_info.order_id} already exists')
-
 @order_router.post('/')
 def add_order(
         order_info: CreateOrderRequest,

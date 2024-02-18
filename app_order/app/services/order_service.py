@@ -6,7 +6,6 @@ from datetime import datetime
 import asyncio
 
 from app.models.order import Order, OrderStatus
-from app.rabbitmq import send_to_document_queue
 from app.repositories.db_order_repo import OrderRepo
 
 
@@ -38,6 +37,7 @@ class OrderService():
         return self.order_repo.create_order(order)
 
     def accepted_order(self, id: UUID) -> Order:
+        from app.rabbitmq import send_to_document_queue
         order = self.order_repo.get_order_by_id(id)
         if order.status != OrderStatus.CREATE:
             raise ValueError
